@@ -1,0 +1,152 @@
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('chat-form');
+  const input = document.getElementById('user-input');
+  const chatBox = document.getElementById('chat-box');
+
+  // --- Typewriter Effect ---
+  function typewriterEffect(text, container) {
+    container.innerHTML = '';
+    const cursor = document.createElement('span');
+    cursor.className = 'cursor';
+    cursor.textContent = '|';
+    container.appendChild(cursor);
+
+    let index = 0;
+    function type() {
+      if (index < text.length) {
+        cursor.insertAdjacentText('beforebegin', text.charAt(index));
+        index++;
+        setTimeout(type, 30);
+      } else {
+        setTimeout(() => {
+          cursor.remove();
+        }, 500);
+      }
+    }
+    type();
+  }
+
+  // --- Append Message to Chat ---
+  function appendMessage(text, sender, avatarSrc) {
+    const messageWrapper = document.createElement('div');
+    messageWrapper.className = `message ${sender}`;
+
+    const avatar = document.createElement('img');
+    avatar.src = avatarSrc;
+    avatar.className = 'avatar';
+
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble';
+
+    if (sender === 'user') {
+      bubble.textContent = text;
+      messageWrapper.appendChild(bubble);
+      messageWrapper.appendChild(avatar);
+    } else {
+      messageWrapper.appendChild(avatar);
+      messageWrapper.appendChild(bubble);
+      typewriterEffect(text, bubble);
+    }
+
+    chatBox.appendChild(messageWrapper);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+
+  // --- Loading Indicator ---
+  function showLoading() {
+    if (document.getElementById('loading-message')) return;
+
+    const loadingMessage = document.createElement('div');
+    loadingMessage.className = 'message ai loading';
+    loadingMessage.id = 'loading-message';
+    loadingMessage.textContent = 'Gaia is thinking';
+
+    const dots = document.createElement('span');
+    dots.className = 'loading-dots';
+    dots.textContent = '...';
+    loadingMessage.appendChild(dots);
+
+    chatBox.appendChild(loadingMessage);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+
+  function removeLoading() {
+    const loadingMessage = document.getElementById('loading-message');
+    if (loadingMessage) {
+      loadingMessage.remove();
+    }
+  }
+
+  // --- Go to Different Modes ---
+  function goToMode(mode) {
+    if (mode === 'chat') {
+      window.location.href = 'chat.html';
+    } else if (mode === 'play') {
+      window.location.href = 'play.html';
+    }
+  }
+
+  // --- Chat Submit Logic ---
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const message = input.value.trim();
+      if (!message) return;
+
+      appendMessage(message, 'user', '/static/user_avatar.jpg');
+      input.value = '';
+
+      showLoading();
+
+      fetch('/message', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+      })
+        .then(response => response.json())
+        .then(data => {
+          removeLoading();
+          appendMessage(data.reply, 'ai', '/static/gaia_avatar.jpg');
+        })
+        .catch(error => {
+          removeLoading();
+          console.error('Error:', error);
+          appendMessage("Something went wrong.", 'ai', '/static/gaia_avatar.jpg');
+        });
+    });
+  }
+
+  // --- Game Selection Logic for play.html ---
+  const startScreen = document.getElementById('start-screen');
+  const gameFrame = document.getElementById('game-frame');
+  const buttons = document.querySelectorAll('.game-select-btn');
+  const backBtn = document.getElementById('back-btn');
+
+  if (startScreen && gameFrame) {
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const game = button.dataset.game;
+
+        startScreen.style.display = 'none';
+        gameFrame.style.display = 'flex';
+
+        const gaiaComment = document.getElementById('gaia-comment');
+        if (gaiaComment) {
+          gaiaComment.textContent = `Let's play some ${game.charAt(0).toUpperCase() + game.slice(1)}!`;
+        }
+
+        // Trigger the game's start function if available
+        if (game === 'pong' && typeof startPong === 'function') {
+          startPong();
+        }
+      });
+    });
+
+    if (backBtn) {
+      backBtn.addEventListener('click', () => {
+        gameFrame.style.display = 'none';
+        startScreen.style.display = 'block';
+      });
+    }
+  }
+});

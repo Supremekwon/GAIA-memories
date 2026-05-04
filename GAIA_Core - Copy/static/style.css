@@ -1,0 +1,830 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: url('/static/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.chat-container {
+  width: 100%;
+  max-width: 768px;
+  height: 80vh;
+  display: flex;
+  z-index: 1; /* Above the blur */
+  flex-direction: column;
+  background: transparent;
+  border-radius: 50px;
+  overflow: hidden;
+  padding-bottom: 40px;
+}
+
+.background-blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(12px);
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+  pointer-events: none; /* Allow clicks to pass through */
+}
+
+#chat-box {
+  background: rgba(0, 0, 0, 0.5); /* semi-transparent dark overlay */
+  backdrop-filter: blur(10px); /* this applies the blur */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  padding: 20px;
+
+  border-radius: 12px;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+
+.message {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.message.user {
+  justify-content: flex-end;
+}
+
+.message.ai {
+  justify-content: flex-start;
+}
+
+.bubble {
+  padding: 12px 16px;
+  border-radius: 16px;
+  max-width: 75%;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.user .bubble {
+  background-color: #ff69b4;
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.ai .bubble {
+  background-color: #33354d;
+  color: #f5f5f5;
+  border-bottom-left-radius: 4px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.input-area {
+  display: flex;
+  padding: 12px 16px;
+  background-color: #1e1e2f;
+  border-top: 1px solid #333;
+  margin-top: auto;
+}
+
+
+
+.input-area input {
+  flex: 1;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  background-color: #2f2f44;
+  color: white;
+}
+
+.input-area button {
+  padding: 12px 20px;
+  margin-left: 12px;
+  border: none;
+  border-radius: 20px;
+  background-color: #ff69b4;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+  background-color: #121212;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+
+
+.chat-overlay {
+  background: rgba(255, 255, 255, 0.05); /* glass-like blur */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+  padding: 30px;
+  width: 90%;
+  max-width: 1000px;
+  height: 85%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+
+#title-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 0;
+  margin: 0;
+  z-index: 1; /* Above the blur */
+  transform: scale(0.8);
+  transform-origin: top center; /* Keeps it centered at the top */
+  background: transparent;
+  border-bottom: 1px solid #333;
+  position: relative;
+  box-shadow: 0 0 12px rgba(255, 105, 180, 0.25);
+  transition: box-shadow 0.3s ease;
+}
+
+#title-card:hover {
+  box-shadow: 0 0 24px rgba(255, 105, 180, 0.6);
+}
+
+.title-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ff69b4;
+  box-shadow: 0 0 10px rgba(255, 105, 180, 0.7);
+  transition: transform 0.3s ease;
+}
+
+.title-avatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 105, 180, 0.9);
+}
+
+.title-text {
+  text-align: center;
+  margin-top: 8px;
+  padding: 0;
+}
+
+#title-card h1 {
+  font-size: 1.6rem;
+  margin: 0;
+  color: #ffb6c1;
+}
+
+.subtitle {
+
+  font-size: 0.85rem;
+  font-style: italic;
+  font-weight: bold;
+  color: #fd4ca3;
+  margin-top: 4px;
+}
+
+.loading-dots::after {
+  content: '';
+  display: inline-block;
+  animation: dots 1.5s steps(3, end) infinite;
+  width: 1.2em;
+  text-align: left;
+}
+.loading-dots::after {
+  content: '';
+  display: inline-block;
+  animation: dots 1.5s steps(3, end) infinite;
+  width: 1.2em;
+  text-align: left;
+}
+
+@keyframes dots {
+  0%, 20% {
+    content: '';
+  }
+  40% {
+    content: '.';
+  }
+  60% {
+    content: '..';
+  }
+  80%, 100% {
+    content: '...';
+  }
+}
+
+.message.loading {
+  font-style: italic;
+  color: #ff69b4;
+}
+
+
+/* --- Landing Page Styles --- */
+
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+              url('/static/background.jpg'); /* <-- update this path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #ffb6c1;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.landing-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #ff69b4;
+  box-shadow: 0 0 40px rgba(255, 105, 180, 0.9);
+  margin-bottom: 25px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.landing-avatar:hover {
+  transform: scale(1.12);
+  box-shadow: 0 0 60px rgba(255, 105, 180, 1);
+}
+
+.landing-title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #ff69b4;
+  margin-bottom: 12px;
+  text-shadow: 0 0 18px #ff69b4cc;
+}
+
+.landing-subtitle {
+  font-size: 1.25rem;
+  color: #ff9bcf;
+  max-width: 320px;
+  margin-bottom: 40px;
+  font-style: italic;
+  text-shadow: 0 0 10px #ff69b4aa;
+}
+
+/* Container for buttons */
+.landing-buttons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Unified button style */
+.landing-btn {
+  background: linear-gradient(135deg, #ff69b4, #d74697);
+  border: none;
+  border-radius: 30px;
+  padding: 16px 48px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  cursor: pointer;
+  box-shadow: 0 0 25px #ff69b4cc;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  user-select: none;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  min-width: 180px;
+}
+
+.landing-btn:hover {
+  background: linear-gradient(135deg, #ff4a9e, #d41f6f);
+  box-shadow: 0 0 50px #ff4a9edd;
+  transform: translateY(-4px) scale(1.05);
+}
+
+.landing-btn:active {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 30px #ff69b4cc;
+}
+
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* horizontally center all child items */
+  justify-content: center; /* vertically center content if container has height */
+  gap: 5px; /* spacing between elements */
+  max-width: 400px; /* optional, to control width */
+  margin: 0 auto; /* center container horizontally */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+
+/* Sakura and canvas remain as you had */
+
+canvas {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.sakura {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform, top;
+  filter: drop-shadow(0 0 1px rgba(0,0,0,0.2));
+}
+
+@keyframes fall {
+  0% {
+    opacity: 0.9;
+    top: 0;
+  }
+  100% {
+    opacity: 0.2;
+    top: 100%;
+  }
+}
+
+@keyframes blow-soft-left {
+  0% { margin-left: 0; }
+  100% { margin-left: -80%; }
+}
+@keyframes blow-medium-left {
+  0% { margin-left: 0; }
+  100% { margin-left: -160%; }
+}
+
+
+
+@keyframes sway-0 {
+  0% { transform: rotate(-5deg); }
+  40% { transform: rotate(28deg); }
+  100% { transform: rotate(3deg); }
+}
+
+#user-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 16px;
+  padding: 10px;
+  width: 100%;
+  color: #fff;
+}
+
+.input-area {
+  display: flex;
+  padding: 12px 16px;
+  background-color: #1e1e2f;
+  border-top: 1px solid #333;
+  margin-top: auto;
+}
+
+.chat-box {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  z-index:2; /* Above the blur */
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scroll-behavior: smooth;
+}
+
+#chat-box:focus {
+  outline: none;
+  box-shadow: none; /* in case there's a shadow acting like an outline */
+}
+
+#chat-form input:focus,
+#chat-form button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+
+.chat-box::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-box::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+  background: #ff69b4;
+  border-radius: 10px;
+}
+
+
+#title-card {
+  text-align: center;
+  margin-bottom: 20px;
+  transform: scale(0.8);
+  transform-origin: top center;
+}
+
+
+.title-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+#title-card h1 {
+  font-size: 28px;
+  margin: 0;
+}
+
+#title-card .subtitle {
+  font-size: 14px;
+  font-style: italic;
+  font-weight: bold;
+  color: hotpink;
+}
+/* --- Base Reset and Layout --- */
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #2b2b2b 0%, #d74697 100%);
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  min-height: 100vh;
+}
+
+/* Main container wraps all content and centers it */
+.main-container {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- Play page styles --- */
+.play-page {
+  background-color: #121212;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Container wrapping all game UI */
+.game-container {
+  max-width: 1000px;
+  width: 100%;
+  min-height: 480px; /* Enough height for Gaia panel + game */
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Game title */
+.game-container > h1 {
+  margin: 0 0 15px 0;
+  font-size: 2rem;
+  color: #ffb6c1;
+  text-align: center;
+}
+
+/* Start Screen */
+.start-screen {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.start-screen p {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+.start-screen .game-select-btn {
+  background: #ff69b4;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 25px;
+  margin: 8px;
+  font-size: 1.1rem;
+  color: #1a1a1a;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.start-screen .game-select-btn:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+
+.start-screen .game-select-btn:hover:not(:disabled) {
+  background: #ff4a9e;
+}
+
+/* --- Game Frame --- */
+.game-frame {
+  display: flex;
+  background: #1a1a1a;
+  border: 2px solid #ff69b4;
+  border-radius: 15px;
+  padding: 20px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 1000px;
+  min-height: 420px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 15px #ff69b4aa;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+/* Gaia side panel */
+.gaia-panel {
+  flex: 1 1 250px;
+  max-width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 30px;
+}
+
+/* Gaia avatar */
+.gaia-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ff69b4;
+  margin-bottom: 15px;
+  box-shadow: 0 0 10px #ff69b4cc;
+  transition: transform 0.3s ease;
+}
+
+.gaia-avatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #ff69b4dd;
+}
+
+/* Gaia commentary */
+.gaia-comment {
+  background: #2e2e2e;
+  padding: 15px;
+  border-radius: 12px;
+  min-height: 140px;
+  font-size: 1.1rem;
+  color: #ffb6c1;
+  box-shadow: inset 0 0 10px #ff69b4aa;
+  text-align: center;
+  user-select: none;
+  width: 100%;
+}
+
+/* Game side panel */
+.game-panel {
+  flex: 2 1 700px;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Game canvas */
+#game-canvas {
+  width: 100%;
+  max-width: 700px;
+  position: relative !important;
+  z-index: 1 !important;
+  pointer-events: auto !important;
+  height: 400px; /* fixed height */
+  border-radius: 15px;
+  border: 3px solid #ff69b4;
+  box-shadow: 0 0 20px #ff69b4bb;
+  display: block;
+}
+
+/* Game control buttons */
+.game-controls {
+  margin-top: 15px;
+}
+
+.game-controls button {
+  background: #ff69b4;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 1rem;
+  color: #1a1a1a;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.game-controls button:hover {
+  background: #ff4a9e;
+}
+
+/* --- Scrollbars for chat etc if needed --- */
+.chat-box::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-box::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+  background: #ff69b4;
+  border-radius: 10px;
+}
+
+/* --- Menu Screen Styles --- */
+#menu-screen {
+  display: none;
+  background: #1a1a1a;
+  border: 2px solid #ff69b4;
+  border-radius: 15px;
+  padding: 25px 30px;
+  margin-top: 20px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 0 20px #ff69b4aa;
+  text-align: center;
+  color: #ffb6c1;
+  font-family: 'Segoe UI', sans-serif;
+  user-select: none;
+}
+
+#menu-screen h2 {
+  margin-top: 0;
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: #ff69b4;
+  text-shadow: 0 0 8px #ff69b4bb;
+  margin-bottom: 15px;
+}
+
+#menu-screen p {
+  margin: 10px 0 20px 0;
+  font-size: 1.1rem;
+  color: #ff8fcf;
+}
+
+#menu-screen label {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #ff79b0;
+  display: block;
+  margin-bottom: 8px;
+}
+
+#points-to-win {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 2px solid #ff69b4;
+  background-color: #2e2e2e;
+  color: #ffb6c1;
+  font-size: 1.1rem;
+  text-align: center;
+  box-shadow: 0 0 10px #ff69b4aa inset;
+  transition: border-color 0.3s ease;
+}
+
+#points-to-win:focus {
+  outline: none;
+  border-color: #ff4a9e;
+  box-shadow: 0 0 15px #ff4a9e;
+}
+
+#start-game-btn {
+  margin-top: 20px;
+  padding: 12px 28px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1a1a1a;
+  background-color: #ff69b4;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 0 15px #ff69b4cc;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#start-game-btn:hover {
+  background-color: #ff4a9e;
+  box-shadow: 0 0 25px #ff4a9edd;
+}
+
+.mode-selector {
+  margin-top: 10px; /* add some space above buttons */
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.music-player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(90deg, #ff80bf, #ff4da6);
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 -4px 15px rgba(255, 77, 166, 0.6);
+  z-index: 1000;
+}
+
+.music-player button {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+.music-player #track-title {
+  flex-grow: 1;
+  font-weight: 600;
+  user-select: none;
+}
+
+.music-player #volume-slider {
+  width: 100px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  height: 5px;
+}
+
+.music-player #volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -5px;
+}
