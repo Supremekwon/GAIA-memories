@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Play with Gaia – Game Mode</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body class="play-page">
+
+  <div class="main-container">
+    <div class="game-container">
+
+      <h1>🎮 Play with Gaia</h1>
+
+      <!-- Menu Screen -->
+      <div id="menu-screen" class="menu-screen" style="display:none;">
+        <h2>Welcome to Pong with Gaia!</h2>
+        <p>Set points needed to win:</p>
+        <input type="number" id="points-to-win" min="1" max="20" value="5" />
+        <br />
+        <button id="start-game-btn">Start Game</button>
+      </div>
+
+      <!-- Start Screen -->
+      <div id="start-screen" class="start-screen">
+        <p>Select a game to play:</p>
+        <button class="game-select-btn" data-game="pong">Pong</button>
+      </div>
+
+      <!-- Main frame: Gaia avatar + commentary on left, game on right -->
+      <div id="game-frame" class="game-frame" style="display:none;">
+        <div class="gaia-panel">
+          <img src="{{ url_for('static', filename='gaia_avatar.jpg') }}" alt="Gaia Avatar" class="gaia-avatar" />
+          <div id="gaia-comment" class="gaia-comment"></div>
+        </div>
+
+        <div class="game-panel">
+          <canvas id="game-canvas" width="700" height="400" style="background:#111;"></canvas>
+          <div class="game-controls">
+            <button id="restart-btn">Restart Game</button>
+            <button id="back-btn">Back to Home</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/sakura.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/pong.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/play.js') }}"></script>
+
+</body>
+</html>

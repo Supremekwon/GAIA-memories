@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gaia – Digital Companion</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+
+ <div id="title-card">
+  <img src="/static/gaia_avatar2.jpg" alt="Gaia Avatar" class="title-avatar">
+  <h1>GAIA</h1>
+  <p class="subtitle">The Gaming Artificial Intelligent Assistant</p>
+</div>
+
+<body style="background: url('{{ url_for('static', filename='background.jpg') }}') no-repeat center center fixed; background-size: cover;">
+  <div class="background-blur"></div> <!-- blur layer -->
+
+
+  <div class="chat-container">
+    <div id="chat-box" class="chat-box"></div>
+    <form id="chat-form" class="input-area">
+      <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off" />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/sakura.js') }}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    new Sakura('body');
+  });
+</script>
+
+
+</body>
+</html>
